@@ -1,0 +1,19 @@
+# Dependencies
+node_modules/
+
+# Build output: dist/ is the bundle, build/ the compiled tests
+dist/
+build/
+
+# A local configuration, with a real token
+*.conf
+!deploy/*.conf
+
+# Logs
+npm-debug.log*
+*.log
+
+# Editor / OS
+.DS_Store
+.vscode/*
+!.vscode/extensions.json

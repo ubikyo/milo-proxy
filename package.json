@@ -1,0 +1,25 @@
+{
+  "name": "milo-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Relais entre Milo et les périphériques d'un site",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "tsc -p tsconfig.test.json && node --test build/test/*.test.js",
+    "start": "node --enable-source-maps dist/milo-proxy.mjs"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.43",
+    "@types/ws": "^8.18.2",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.9.3"
+  }
+}

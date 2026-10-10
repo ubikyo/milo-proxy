@@ -1,0 +1,5 @@
+# /etc/milo.proxy.conf — chmod 600, propriétaire root.
+# Lignes données par Milo : Paramétrage > Proxy, à la création du proxy ou à
+# la régénération de son token.
+server=milo.example.fr
+token=mpx_…

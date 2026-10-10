@@ -1,0 +1,36 @@
+# /etc/systemd/system/milo-proxy.service
+[Unit]
+Description=Milo Proxy
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# No account to create: systemd makes one for the service's lifetime.
+DynamicUser=yes
+# The configuration, with its token, stays readable by root alone: systemd
+# hands a copy to the service ($CREDENTIALS_DIRECTORY/config).
+LoadCredential=config:/etc/milo.proxy.conf
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/node --enable-source-maps /opt/milo-proxy/milo-proxy.mjs
+Restart=always
+RestartSec=5
+# 78: the configuration is wrong — restarting would not fix it.
+RestartPreventExitStatus=78
+
+# Hardening: the proxy only opens network connections.
+NoNewPrivileges=true
+PrivateTmp=true
+PrivateDevices=true
+ProtectSystem=strict
+ProtectHome=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+ProtectControlGroups=true
+RestrictAddressFamilies=AF_INET AF_INET6 AF_UNIX
+RestrictNamespaces=true
+LockPersonality=true
+CapabilityBoundingSet=
+
+[Install]
+WantedBy=multi-user.target
